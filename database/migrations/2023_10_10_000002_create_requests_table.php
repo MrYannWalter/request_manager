@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Identifiant unique
             $table->string('request_title'); // Titre de la requête
             $table->text('request_description'); // Description de la requête
-            $table->enum('status', ['soumise', 'en cours', 'traitée', 'rejetée'])->default('soumise'); // Statut de traitement
+            $table->enum('status', ['soumise', 'en cours', 'traitée', 'rejetée'])->default('soumise');
             $table->enum('priority', ['urgente', 'standard'])->default('standard'); // Priorité
 
             $table->unsignedBigInteger('category_id'); // Catégorie / type de requête
