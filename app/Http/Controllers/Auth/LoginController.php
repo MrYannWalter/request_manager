@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated(Request $request, $user)
+{
+    if ($user->role === 'etudiant') {
+        return redirect()->route('requests.index');
+    }
+
+    if ($user->role === 'agent') {
+        return redirect()->route('agent.assigned.requests');
+    }
+
+    if ($user->role === 'responsable') {
+        return redirect()->route('responsable.requests');
+    }
+
+    return redirect()->route('home');
+}
+
+
 }
