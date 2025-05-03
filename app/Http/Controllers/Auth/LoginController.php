@@ -53,6 +53,10 @@ class LoginController extends Controller
         return redirect()->route('responsable.requests');
     }
 
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.users.index'); 
+    }
+
     return redirect()->route('home');
 }
 

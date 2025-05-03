@@ -10,6 +10,7 @@ use App\Mail\RequestStatusUpdatedMail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RequestSentToResponsableMail;
 use App\Mail\ResponsableNotificationMail;
+use App\Models\Message;
 
 class AgentController extends Controller
 {
@@ -40,8 +41,9 @@ public function edit($id)
     if (auth()->user()->id !== $request->agent_id) {
         abort(403, 'Accès non autorisé.');
     }
+    $messages = Message::where('request_id', $id)->orderBy('created_at')->get();
 
-    return view('agent.edit_request', compact('request'));
+    return view('agent.edit_request', compact('request', 'messages'));
 }
 
 public function update(Request $req, $id)
@@ -117,6 +119,6 @@ public function markAsCompleted($id)
     return redirect()->back()->with('success', 'La requête a été marquée comme traitée et envoyée à un responsable.');
 }
 
-
+                        
 
 }

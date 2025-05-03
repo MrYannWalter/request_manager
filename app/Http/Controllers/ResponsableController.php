@@ -42,6 +42,7 @@ class ResponsableController extends Controller
         Response::create([
             'response_text' => $validated['response_text'] ?? $validated['decision'],
             'request_id' => $requete->id,
+            'decision' => $validated['decision'], 
         ]);
 
         // Mettre à jour le statut de la requête selon la décision

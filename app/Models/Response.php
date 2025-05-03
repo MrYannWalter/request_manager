@@ -12,5 +12,6 @@ class Response extends Model
     protected $fillable = [
         'response_text',
         'request_id',
+        'decision',
     ];
 }

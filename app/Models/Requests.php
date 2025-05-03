@@ -39,9 +39,19 @@ protected $fillable = [
         return $this->belongsTo(Category::class);
     }
     
-public function responses()
-{
-    return $this->hasMany(Response::class, 'request_id');
-}
+    public function responses()
+    {
+        return $this->hasMany(Response::class, 'request_id');
+    }
 
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'responsable_id');
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'request_id');
+    }
+    
+    
 }
