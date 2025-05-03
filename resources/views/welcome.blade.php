@@ -78,7 +78,7 @@
     <div id="particles-js"></div>
 
     <div class="welcome-card">
-        <h1>Mise en place d'une application<br> de gestion de requêtes d'étudiants</h1>
+        <h1>GestRequest</h1>
         <p>Bienvenue sur la plateforme de gestion des demandes au sein de votre institution universitaire.<br> 
         Pour soumettre une requête, merci de vous connecter.</p>
         <a href="{{ route('login') }}" class="btn btn-login">Se connecter</a>

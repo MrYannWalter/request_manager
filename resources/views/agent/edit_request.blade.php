@@ -36,7 +36,7 @@
                 <option value="soumise" {{ $request->status == 'soumise' ? 'selected' : '' }}>Soumise</option>
                 <option value="en cours" {{ $request->status == 'en cours' ? 'selected' : '' }}>En cours</option>
                 <option value="traitée" {{ $request->status == 'traitée' ? 'selected' : '' }}>Traitée</option>
-                <option value="rejetée" {{ $request->status == 'rejetée' ? 'selected' : '' }}>Rejetée</option>
+                {{-- <option value="rejetée" {{ $request->status == 'rejetée' ? 'selected' : '' }}>Rejetée</option> --}}
             </select>
         </div>
 
@@ -44,4 +44,7 @@
         <a href="/agent/assigned-requests" class="btn btn-secondary">Retour</a>
     </form>
 </div>
+
+
+
 @endsection

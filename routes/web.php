@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ResponsableController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -60,6 +61,50 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/responsable/requests', [ResponsableController::class, 'index'])->name('responsable.requests');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+
+
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+    Route::get('/users', [AdminController::class, 'index'])->name('admin.users.index');
+});
+Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+
+
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function() {
+
+    // Afficher la liste des utilisateurs
+    Route::get('/users', [AdminController::class, 'index'])->name('users.index');
+    
+    // Afficher le formulaire pour créer un utilisateur
+    Route::get('/users/create', [AdminController::class, 'create'])->name('users.create');
+    
+    // Enregistrer un nouvel utilisateur
+    Route::post('/users', [AdminController::class, 'store'])->name('users.store');
+    
+    // Afficher le formulaire pour modifier un utilisateur
+    Route::get('/users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
+    
+    // Mettre à jour un utilisateur
+    Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.update');
+    
+    // Supprimer un utilisateur
+    Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+});
+
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/requêtes', [AdminController::class, 'requestsIndex'])->name('requests.index');
+    Route::delete('/requêtes/{id}', [AdminController::class, 'destroyRequest'])->name('requests.destroy');
+    Route::get('/requêtes/{id}', [AdminController::class, 'show'])->name('requests.show');
+
+});
+
 
 
 
